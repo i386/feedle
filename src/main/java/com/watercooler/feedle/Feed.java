@@ -1,5 +1,8 @@
 package com.watercooler.feedle;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Feed
 {
     private String title;
@@ -11,10 +14,10 @@ public class Feed
     private String lastBuildDate;
     private String category;
     private String generator;
-    private String ttl;
     private String image;
     private String managingEditor;
     private String webMaster;
+    private List<Entry> entries = new LinkedList<Entry>();
 
     public String getTitle()
     {
@@ -106,16 +109,6 @@ public class Feed
         this.generator = generator;
     }
 
-    public String getTtl()
-    {
-        return ttl;
-    }
-
-    public void setTtl(String ttl)
-    {
-        this.ttl = ttl;
-    }
-
     public String getImage()
     {
         return image;
@@ -144,5 +137,15 @@ public class Feed
     public void setWebMaster(String webMaster)
     {
         this.webMaster = webMaster;
+    }
+
+    public List<Entry> getEntries()
+    {
+        return entries;
+    }
+
+    public void setEntries(List<Entry> entries)
+    {
+        this.entries = entries;
     }
 }

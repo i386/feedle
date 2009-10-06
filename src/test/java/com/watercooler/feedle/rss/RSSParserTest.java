@@ -29,5 +29,8 @@ public class RSSParserTest extends TestCase
         assertEquals("Weblog Editor 2.0", feed.getGenerator());
         assertEquals("editor@example.com", feed.getManagingEditor());
         assertEquals("webmaster@example.com", feed.getWebMaster());
+        assertEquals("http://to/my/image.png", feed.getImage());
+
+        assertEquals(4, feed.getEntries().size());
     }
 }
