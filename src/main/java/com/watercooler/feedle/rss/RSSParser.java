@@ -3,6 +3,7 @@ package com.watercooler.feedle.rss;
 import com.watercooler.feedle.Entry;
 import com.watercooler.feedle.Feed;
 import com.watercooler.feedle.FeedParser;
+import com.watercooler.feedle.FeedParserException;
 import org.kxml2.io.KXmlParser;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -13,21 +14,28 @@ import java.io.InputStreamReader;
 
 public class RSSParser implements FeedParser
 {
-    public Feed parse(final InputStream inputStream) throws XmlPullParserException, IOException
+    public Feed parse(final InputStream inputStream) throws FeedParserException, IOException
     {
         final Feed feed = new Feed();
         final KXmlParser parser = new KXmlParser();
 
-        parser.setInput(new InputStreamReader(inputStream));
-        parser.nextTag();
+        try
+        {
+            parser.setInput(new InputStreamReader(inputStream));
+            parser.nextTag();
 
-        parser.require(XmlPullParser.START_TAG, null, "rss");
-        parser.nextTag();
+            parser.require(XmlPullParser.START_TAG, null, "rss");
+            parser.nextTag();
 
-        parser.require(XmlPullParser.START_TAG, null, "channel");
-        parser.nextTag();
+            parser.require(XmlPullParser.START_TAG, null, "channel");
+            parser.nextTag();
 
-        parseChannel(feed, parser);
+            parseChannel(feed, parser);
+        }
+        catch (XmlPullParserException e)
+        {
+            throw new FeedParserException(e.getMessage(), e);
+        }
 
         return feed;
     }

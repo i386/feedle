@@ -7,5 +7,5 @@ import java.io.InputStream;
 
 public interface FeedParser
 {
-    Feed parse(InputStream inputStream) throws XmlPullParserException, IOException;
+    Feed parse(InputStream inputStream) throws FeedParserException, IOException;
 }
